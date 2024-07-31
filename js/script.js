@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const catalog = document.getElementById('catalog');
     const spreadsheetId = '1Uv7G-nbE_TJJH0OwR1NxkI9g_V0sjRLfahO5qons2DQ';
-    const range = 'Sheet1';
+    const range = 'Sheet1!A:CP';
     //https://docs.google.com/spreadsheets/d/1Uv7G-nbE_TJJH0OwR1NxkI9g_V0sjRLfahO5qons2DQ/edit?usp=drive_link
 
     const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=${range}`;
