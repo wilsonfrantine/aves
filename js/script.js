@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(url)
         .then(response => response.text())
         .then(csvText => {
-            const rows = csvText.split('\n').slice(1); // Ignorar a primeira linha (cabeçalhos)
+            const rows = csvText.split('\n').slice(2); // Ignorar a primeira linha (cabeçalhos)
 
             rows.forEach(row => {
                 const columns = row.match(/("([^"]|"")*"|[^,]*)(?=,|$)/g);
