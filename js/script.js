@@ -1,27 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
     const catalog = document.getElementById('catalog');
-    const apiKey = 'YOUR_GOOGLE_SHEETS_API_KEY';
-    const spreadsheetId = 'YOUR_SPREADSHEET_ID';
-    const range = 'Sheet1!A:Z';
+    const spreadsheetId = '1Uv7G-nbE_TJJH0OwR1NxkI9g_V0sjRLfahO5qons2DQ';
+    const sheetName = 'Sheet1';
 
-    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`)
-        .then(response => response.json())
-        .then(data => {
-            const rows = data.values;
-            rows.slice(1).forEach(row => {
-                const studentName = row[1];
-                const groupMembers = row[2];
+    const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=${sheetName}`;
+
+    fetch(url)
+        .then(response => response.text())
+        .then(csvText => {
+            const rows = csvText.split('\n').slice(1); // Ignorar a primeira linha (cabeçalhos)
+            rows.forEach(row => {
+                const columns = row.split(',');
+
+                const studentName = columns[1];
+                const groupMembers = columns[2];
                 // Loop through the bird data starting from the 5th column (index 4)
-                for (let i = 4; i < row.length; i += 10) {
-                    const nomeComum = row[i];
-                    const especie = row[i + 1];
-                    const familia = row[i + 2];
-                    const ordem = row[i + 3];
-                    const alimentacao = row[i + 4];
-                    const habitat = row[i + 5];
-                    const curiosidades = row[i + 6];
-                    const imagem = row[i + 7];
-                    const localFoto = row[i + 8];
+                for (let i = 4; i < columns.length; i += 10) {
+                    const nomeComum = columns[i];
+                    const especie = columns[i + 1];
+                    const familia = columns[i + 2];
+                    const ordem = columns[i + 3];
+                    const alimentacao = columns[i + 4];
+                    const habitat = columns[i + 5];
+                    const curiosidades = columns[i + 6];
+                    const imagem = columns[i + 7];
+                    const localFoto = columns[i + 8];
 
                     if (nomeComum) {
                         const card = document.createElement('div');
