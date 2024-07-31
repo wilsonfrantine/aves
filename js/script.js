@@ -1,23 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     const catalog = document.getElementById('catalog');
-    const spreadsheetId = '1Uv7G-nbE_TJJH0OwR1NxkI9g_V0sjRLfahO5qons2DQ';
-    const range = 'Sheet1!A:CP';
-    //https://docs.google.com/spreadsheets/d/1Uv7G-nbE_TJJH0OwR1NxkI9g_V0sjRLfahO5qons2DQ/edit?usp=drive_link
-
-    const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=${range}`;
+    const url = './data/data.xlsx'; // Atualize o caminho para o arquivo Excel local
 
     fetch(url)
-        .then(response => response.text())
-        .then(csvText => {
-            const rows = csvText.split('\n').slice(2); // Ignorar a primeira linha (cabeçalhos)
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[sheetName];
+            const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
-            rows.forEach(row => {
-                const columns = row.match(/("([^"]|"")*"|[^,]*)(?=,|$)/g);
-                
+            json.slice(1).forEach(row => {
+                const columns = row;
+
                 const studentName = columns[1];
                 const groupMembers = columns[2];
                 // Loop through the bird data starting from the 5th column (index 4)
-                for (let i = 5; i < columns.length; i += 10) {
+                for (let i = 4; i < columns.length; i += 9) {
                     const nomeComum = columns[i];
                     const especie = columns[i + 1];
                     const familia = columns[i + 2];
@@ -25,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const alimentacao = columns[i + 4];
                     const habitat = columns[i + 5];
                     const curiosidades = columns[i + 6];
-                    const imagem = columns[i + 7];
+                    let imagem = columns[i + 7];
                     const localFoto = columns[i + 8];
 
                     if (nomeComum) {
@@ -35,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const img = document.createElement('img');
                         img.src = imagem;
                         img.alt = nomeComum;
+                        img.onerror = () => console.error(`Erro ao carregar imagem: ${imagem}`);
                         card.appendChild(img);
 
                         const title = document.createElement('h2');
@@ -42,37 +42,42 @@ document.addEventListener('DOMContentLoaded', () => {
                         card.appendChild(title);
 
                         const especieElement = document.createElement('p');
-                        especieElement.textContent = `Espécie: ${especie}`;
+                        especieElement.innerHTML = `<strong>Espécie:</strong> <i>${especie}</i>`;
                         card.appendChild(especieElement);
 
                         const familiaElement = document.createElement('p');
-                        familiaElement.textContent = `Família: ${familia}`;
+                        familiaElement.innerHTML = `<strong>Família:</strong> ${familia}`;
                         card.appendChild(familiaElement);
 
                         const ordemElement = document.createElement('p');
-                        ordemElement.textContent = `Ordem: ${ordem}`;
+                        ordemElement.innerHTML = `<strong>Ordem:</strong> ${ordem}`;
                         card.appendChild(ordemElement);
 
                         const alimentacaoElement = document.createElement('p');
-                        alimentacaoElement.textContent = `Alimentação: ${alimentacao}`;
+                        alimentacaoElement.innerHTML = `<strong>Alimentação:</strong> ${alimentacao}`;
                         card.appendChild(alimentacaoElement);
 
                         const habitatElement = document.createElement('p');
-                        habitatElement.textContent = `Habitat: ${habitat}`;
+                        habitatElement.innerHTML = `<strong>Habitat:</strong> ${habitat}`;
                         card.appendChild(habitatElement);
 
                         const curiosidadesElement = document.createElement('p');
-                        curiosidadesElement.textContent = `Curiosidades: ${curiosidades}`;
+                        curiosidadesElement.innerHTML = `<strong>Curiosidades:</strong> ${curiosidades}`;
                         card.appendChild(curiosidadesElement);
 
                         const localFotoElement = document.createElement('p');
-                        localFotoElement.textContent = `Local da foto: ${localFoto}`;
+                        localFotoElement.innerHTML = `<strong>Local da foto:</strong> ${localFoto}`;
                         card.appendChild(localFotoElement);
+
+                        const fonteElement = document.createElement('p');
+                        fonteElement.innerHTML = `<strong>Fonte:</strong> ${studentName}`;
+                        card.appendChild(fonteElement);
 
                         catalog.appendChild(card);
                     }
                 }
             });
+            console.log('Todos os dados foram processados com sucesso.');
         })
         .catch(error => console.error('Error fetching data: ', error));
 });
