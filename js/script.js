@@ -1,17 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const catalog = document.getElementById('catalog');
     const spreadsheetId = '1Uv7G-nbE_TJJH0OwR1NxkI9g_V0sjRLfahO5qons2DQ';
-    const sheetName = 'Sheet1';
+    const range = 'Sheet1!A:Z';
 
-    const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=${sheetName}`;
+    const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=${range}`;
 
     fetch(url)
         .then(response => response.text())
         .then(csvText => {
             const rows = csvText.split('\n').slice(1); // Ignorar a primeira linha (cabeçalhos)
-            rows.forEach(row => {
-                const columns = row.split(',');
 
+            rows.forEach(row => {
+                const columns = row.match(/("([^"]|"")*"|[^,]*)(?=,|$)/g);
+                
                 const studentName = columns[1];
                 const groupMembers = columns[2];
                 // Loop through the bird data starting from the 5th column (index 4)
