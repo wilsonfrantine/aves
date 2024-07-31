@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const studentName = columns[1];
                 const groupMembers = columns[2];
                 // Loop through the bird data starting from the 5th column (index 4)
-                for (let i = 5; i < columns.length; i += 10) {
+                for (let i = 4; i < columns.length; i += 10) {
                     const nomeComum = columns[i];
                     const especie = columns[i + 1];
                     const familia = columns[i + 2];
