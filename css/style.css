@@ -6,10 +6,24 @@ body {
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: #2196F3;
     color: white;
     text-align: center;
     padding: 1em 0;
+}
+
+header button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    background-color: #1976D2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+header button:hover {
+    background-color: #0D47A1;
 }
 
 main {
@@ -27,6 +41,12 @@ main {
     max-width: 300px;
     padding: 1em;
     width: 100%;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
 }
 
 .card img {
@@ -35,13 +55,96 @@ main {
 }
 
 .card h2 {
-    color: #4CAF50;
+    color: #2196F3;
     font-size: 1.5em;
     margin: 0.5em 0;
 }
 
 .card p {
     margin: 0.5em 0;
+}
+
+.card p strong {
+    font-weight: bold;
+}
+
+.card p i {
+    font-style: italic;
+}
+
+.zoom-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.zoom-modal .zoom-content {
+    position: relative;
+    margin: auto;
+    padding: 1em;
+    max-width: 90%;
+    max-height: 80%;
+    text-align: center;
+}
+
+.zoom-modal .zoom-content img {
+    max-width: 100%;
+    max-height: 70vh;
+    margin-bottom: 1em;
+}
+
+.zoom-modal .zoom-content #zoomInfo {
+    color: white;
+    text-align: center;
+}
+
+.zoom-modal .close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.zoom-modal .close:hover,
+.zoom-modal .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.3s;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+#prevBtn {
+    left: 10px;
+}
+
+#nextBtn {
+    right: 10px;
+}
+
+.nav-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 @media (max-width: 600px) {
