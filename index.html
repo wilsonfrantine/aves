@@ -5,25 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aves Procopenses</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/metrics.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="./js/script.js" defer></script>
+    <script src="./js/metrics.js" defer></script>
+    <script src="./js/effects.js" defer></script> <!-- Added effects.js -->
 </head>
 <body>
-	<header class="banner">		
+    <header class="banner">        
     </header>
-	<div class="buttons">
-		<button id="sortNomeComum">Ordenar por Nome Comum</button>
+    
+    <div class="metrics-container">
+        <div class="metric">
+            <div class="info-card">
+                <div class="info-card-label" id="speciesCount"></div>
+                <img src="./icons/species-icon.png" alt="Ícone de Espécies">
+            </div>
+        </div>
+        <div class="metric">
+            <div class="info-card">
+                <div class="info-card-label" id="generaCount"></div>
+                <img src="./icons/genera-icon.png" alt="Ícone de Gêneros">
+            </div>
+        </div>
+        <div class="metric">
+            <div class="info-card">
+                <div class="info-card-label" id="familiesCount"></div>
+                <img src="./icons/families-icon.png" alt="Ícone de Famílias">
+            </div>
+        </div>
+        <div class="metric">
+            <div class="info-card">
+                <div class="info-card-label" id="ordersCount"></div>
+                <img src="./icons/orders-icon.png" alt="Ícone de Ordens">
+            </div>
+        </div>
+    </div>
+
+    <div class="text-info">
+        <p><strong><span id="topOrder"></span></strong> é a ordem com maior número de espécies (<strong><span id="topOrderCount"></span></strong> espécies). A família <strong><span id="topFamily"></span></strong> é a mais rica, com <strong><span id="topFamilyCount"></span></strong> espécies, assim como o gênero <strong><i><span id="topGenus"></span></i></strong> com <strong><span id="topGenusCount"></span></strong> espécies.</p>
+    </div>
+    
+    <div class="buttons">
+        <button id="sortNomeComum">Ordenar por Nome Comum</button>
         <button id="sortEspecie">Ordenar por Espécie</button>
         <button id="sortFamilia">Ordenar por Família</button>
         <button id="sortOrdem">Ordenar por Ordem</button>
-	</div>
+        <a href="#inventory" class="button-link">Ir para Inventário</a> <!-- Button link to inventory -->
+        <a href="#catalog" class="button-link">Ir para Imagens</a> <!-- Button link to images -->
+    </div>
+    
     <main id="catalog">
         <!-- Aqui as aves serão inseridas pelo JavaScript -->
     </main>
+
+    <div id="inventory">
+        <h2>Aves Procopenses: Uma Visão Geral das Espécies!</h2>
+        <div id="inventoryTable"></div>
+    </div>
+
+    <div id="credits">
+        <h2>Créditos</h2>
+        <p>
+            Este trabalho foi realizado pelos alunos: <span id="groupMembers"></span>.<br>
+            Professor responsável: Dr. Wilson Frantine-Silva, contato: <a href="mailto:wilson.frantine@uenp.edu.br">wilson.frantine@uenp.edu.br</a>.<br>
+            Agradecimentos à UENP, Campus de Cornélio Procópio e ao colegiado de Ciências Biológicas (CCHE, UENP-CP).
+        </p>
+        <div class="logos">
+            <img src="./img/logo-uenp.png" alt="Logo UENP">
+            <img src="./img/logo-ccb-cp.png" alt="Logo CCHE, UENP-CP">
+        </div>
+    </div>
+    
     <div id="zoomModal" class="zoom-modal">
         <span class="close" id="closeBtn">&times;</span>
         <button class="nav-btn" id="prevBtn">&#10094;</button>
-        <button class="nav-btn" id="nextBtn">&#10095;</button>
+        <button class="nav-btn" id="nextBtn">&#10095;"></button>
         <div class="zoom-content">
             <img id="zoomImage" src="" alt="">
             <div id="zoomInfo"></div>

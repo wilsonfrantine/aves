@@ -203,7 +203,6 @@ main {
     padding: 5px;
 }
 
-
 @media (max-width: 600px) {
     main {
         padding: 1em;
@@ -213,3 +212,5 @@ main {
         margin: 1em 0;
     }
 }
+
+

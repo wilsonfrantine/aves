@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = './data/data.xlsx';
 
     let cards = [];
+    let groupMembersSet = new Set();
 
     fetch(url)
         .then(response => response.arrayBuffer())
@@ -23,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const studentName = columns[1];
                 const groupMembers = columns[2];
+                groupMembers.split(',').forEach(member => groupMembersSet.add(member.trim()));
+
                 for (let i = 4; i < columns.length; i += 9) {
                     const nomeComum = columns[i];
                     const especie = columns[i + 1];
@@ -109,6 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }, { threshold: 0.1 });
 
             document.querySelectorAll('.card').forEach(card => observer.observe(card));
+
+            // Adiciona os nomes dos alunos ao campo de créditos
+            const groupMembersArray = Array.from(groupMembersSet).sort();
+            document.getElementById('groupMembers').textContent = groupMembersArray.join(', ');
 
             console.log('Todos os dados foram processados com sucesso.');
         })
