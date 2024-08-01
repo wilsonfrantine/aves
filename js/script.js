@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sortFamiliaBtn = document.getElementById('sortFamilia');
     const sortOrdemBtn = document.getElementById('sortOrdem');
     const url = './data/data.xlsx';
+    const apiKey = 'AIzaSyBP-CYUxlJcRCqT5dUfdd_SCMkw6Ntb4sw';
 
     let cards = [];
     let currentIndex = 0;
@@ -43,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (imagem && imagem.includes('drive.google.com/open?id=')) {
                         const fileId = imagem.split('id=')[1];
-                        imagem = `https://drive.usercontent.google.com/download?id=${fileId}&export=view`;
+                        imagem = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
                     }
 
                     if (nomeComum) {
@@ -52,9 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         card.dataset.index = cards.length;
 
                         const img = document.createElement('img');
-                        img.src = imagem;
+                        const cachedImage = localStorage.getItem(imagem);
+                        if (cachedImage) {
+                            img.src = cachedImage;
+                        } else {
+                            img.src = imagem;
+                            img.onload = () => {
+                                localStorage.setItem(imagem, img.src);
+                            };
+                            img.onerror = () => console.error(`Erro ao carregar imagem: ${imagem}`);
+                        }
                         img.alt = nomeComum;
-                        img.onerror = () => console.error(`Erro ao carregar imagem: ${imagem}`);
                         card.appendChild(img);
 
                         const title = document.createElement('h2');
