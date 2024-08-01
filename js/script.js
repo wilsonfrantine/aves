@@ -1,20 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const catalog = document.getElementById('catalog');
-    const zoomModal = document.getElementById('zoomModal');
-    const zoomImage = document.getElementById('zoomImage');
-    const zoomInfo = document.getElementById('zoomInfo');
-    const closeBtn = document.getElementById('closeBtn');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
     const sortNomeComumBtn = document.getElementById('sortNomeComum');
     const sortEspecieBtn = document.getElementById('sortEspecie');
     const sortFamiliaBtn = document.getElementById('sortFamilia');
     const sortOrdemBtn = document.getElementById('sortOrdem');
     const url = './data/data.xlsx';
-    const apiKey = 'AIzaSyBP-CYUxlJcRCqT5dUfdd_SCMkw6Ntb4sw';
 
     let cards = [];
-    let currentIndex = 0;
 
     fetch(url)
         .then(response => response.arrayBuffer())
@@ -44,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (imagem && imagem.includes('drive.google.com/open?id=')) {
                         const fileId = imagem.split('id=')[1];
-                        imagem = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
+                        imagem = `https://drive.google.com/file/d/${fileId}/preview`;
                     }
 
                     if (nomeComum) {
@@ -52,19 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         card.className = 'card';
                         card.dataset.index = cards.length;
 
-                        const img = document.createElement('img');
-                        const cachedImage = localStorage.getItem(imagem);
-                        if (cachedImage) {
-                            img.src = cachedImage;
-                        } else {
-                            img.src = imagem;
-                            img.onload = () => {
-                                localStorage.setItem(imagem, img.src);
-                            };
-                            img.onerror = () => console.error(`Erro ao carregar imagem: ${imagem}`);
-                        }
-                        img.alt = nomeComum;
-                        card.appendChild(img);
+                        const iframe = document.createElement('iframe');
+                        iframe.dataset.src = imagem;
+                        iframe.width = '100%';
+                        iframe.height = '200px'; // Ajuste a altura conforme necessário
+                        iframe.style.border = 'none';
+                        iframe.allow = 'autoplay';
+                        card.appendChild(iframe);
 
                         const title = document.createElement('h2');
                         title.textContent = nomeComum;
@@ -102,47 +88,31 @@ document.addEventListener('DOMContentLoaded', () => {
                         fonteElement.innerHTML = `<strong>Alunos:</strong> ${groupMembers}`;
                         card.appendChild(fonteElement);
 
-                        card.addEventListener('click', () => openZoom(card));
                         catalog.appendChild(card);
                         cards.push(card);
                     }
                 }
             });
+
+            // Iniciar a observação das divs para lazy loading dos iframes
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const iframe = entry.target.querySelector('iframe');
+                        if (iframe.dataset.src) {
+                            iframe.src = iframe.dataset.src;
+                            delete iframe.dataset.src;
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.card').forEach(card => observer.observe(card));
+
             console.log('Todos os dados foram processados com sucesso.');
         })
         .catch(error => console.error('Error fetching data: ', error));
-
-    function openZoom(card) {
-        currentIndex = parseInt(card.dataset.index);
-        updateZoom();
-        zoomModal.style.display = 'block';
-    }
-
-    function updateZoom() {
-        const card = cards[currentIndex];
-        const imgSrc = card.querySelector('img').src;
-        const info = card.querySelectorAll('p, h2');
-
-        zoomImage.src = imgSrc;
-        zoomInfo.innerHTML = '';
-        info.forEach(element => {
-            zoomInfo.innerHTML += element.outerHTML + '<br>';
-        });
-    }
-
-    function closeZoom() {
-        zoomModal.style.display = 'none';
-    }
-
-    function showPrev() {
-        currentIndex = (currentIndex > 0) ? currentIndex - 1 : cards.length - 1;
-        updateZoom();
-    }
-
-    function showNext() {
-        currentIndex = (currentIndex < cards.length - 1) ? currentIndex + 1 : 0;
-        updateZoom();
-    }
 
     function sortCatalog(compareFunction) {
         cards.sort(compareFunction);
@@ -182,14 +152,5 @@ document.addEventListener('DOMContentLoaded', () => {
             const ordemB = b.querySelector('p:nth-of-type(3)').textContent.toLowerCase();
             return ordemA.localeCompare(ordemB);
         });
-    });
-
-    closeBtn.addEventListener('click', closeZoom);
-    prevBtn.addEventListener('click', showPrev);
-    nextBtn.addEventListener('click', showNext);
-    window.addEventListener('click', (event) => {
-        if (event.target === zoomModal) {
-            closeZoom();
-        }
     });
 });
