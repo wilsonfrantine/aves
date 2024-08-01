@@ -78,8 +78,12 @@ body, html {
 }
 
 .buttons {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap to new lines */
+    justify-content: center;
     text-align: center;
     margin: 20px 0;
+    gap: 10px; /* Add some space between the buttons */
 }
 
 .buttons button, .buttons .button-link {
@@ -152,6 +156,8 @@ body, html {
     margin: 40px auto;
     width: 80%;
     text-align: left; /* Align text to the left */
+    display: flex;
+    align-items: flex-start; /* Align logos to the top */
 }
 
 #credits h2 {
@@ -169,8 +175,8 @@ body, html {
 }
 
 #credits .logos {
-    display: inline-block;
-    vertical-align: middle;
+    display: flex;
+    vertical-align: top; /* Align logos to the top */
     text-align: center;
 }
 
