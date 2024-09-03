@@ -101,6 +101,9 @@ function createCarouselItem(record, isActive) {
     infoContainer.appendChild(createInfoParagraph('Curiosidades: ', record.curiosidades));
     infoContainer.appendChild(createInfoParagraph('Local da Foto: ', record.localFoto));
 
+    // Adiciona o parágrafo para exibir os alunos que contribuíram para o registro
+    infoContainer.appendChild(createInfoParagraph('Alunos: ', record.groupMembers));
+
     // Adiciona o contêiner de informações ao item do carrossel
     item.appendChild(infoContainer);
 
