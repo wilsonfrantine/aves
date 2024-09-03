@@ -443,7 +443,104 @@ main {
     max-width: 80px;
     height: auto;
 }
+/* Estilos de carrossel */
 
+.species-card {
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #FFFFFFC0; /* Mantém o fundo consistente com outros cards */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Necessário para posicionar os botões de navegação */
+    max-width: 500px; /* Limite de largura para cards */
+    text-align: center; /* Centraliza o conteúdo */
+    display: inline-block; /* Faz o card ser exibido em linha */
+    width: 100%;
+}
+
+.species-header {
+    font-size: 1.6em;
+    color: #2196F3;
+    margin-bottom: 15px;
+    display: none;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+}
+
+.carousel-item {
+    min-width: 100%;
+    display: none; /* Esconde todos os itens */
+}
+
+.carousel-item.active {
+    display: block; /* Mostra apenas o item ativo */
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #1976D2; /* Cor consistente com outros botões */
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    z-index: 10; /* Garante que os botões estejam acima dos outros elementos */
+}
+
+.carousel-btn:hover {
+    background-color: #0056b3; /* Cor de hover consistente com outros botões */
+}
+
+.prev-btn {
+    left: 10px; /* Posiciona o botão à esquerda */
+}
+
+.next-btn {
+    right: 10px; /* Posiciona o botão à direita */
+}
+
+/* Ajustes para imagens e informações no carrossel */
+.bird-image {
+    width: 100%;
+    height: 250px; /* Ajuste conforme necessário */
+    border-radius: 5px;
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+    margin-bottom: 10px;
+}
+
+.bird-info p {
+    margin: 0.5em 0;
+    font-size: 1em; /* Consistente com o restante do texto */
+    color: #333;
+    margin:15%;
+}
+
+.bird-info p strong {
+    font-weight: bold;
+}
+
+.bird-info p i {
+    font-style: italic;
+}
+bird-name {
+    color:#1976D2
+}
 
 @media (max-width: 600px) {
     main {
