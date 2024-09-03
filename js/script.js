@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sortOrdemBtn.addEventListener('click', () => {
         sortCatalog((a, b) => {
             const ordemA = a.querySelector('p:nth-of-type(3)').textContent.toLowerCase();
-            const ordemB = b.querySelector('p:nth-of-type(3)').textContent.toLowerCase();
+            const ordemB = b.querySelector('p:nth-of-type(3)').textContent.to.lowerCase();
             return ordemA.localeCompare(ordemB);
         });
     });

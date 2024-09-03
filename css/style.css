@@ -3,22 +3,41 @@ body, html {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
-    background-color: white; /* Ou azul claro, conforme necessário */
-}
+    background-color: white;
+    background-image: url('../img/background.svg'); 
+    background-size: contain;
+    background-repeat:no-repeat;
+    background-position: top center;
+ }
 
 .banner {
     position: relative;
     width: 100%;
-    height: 350px;
-    background-image: url('../img/banner.png'); /* Certifique-se de ajustar o caminho conforme necessário */
-    background-size: cover;
-    background-position: center center;
+    padding-bottom: calc(1300 / 3500 * 100%);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-	max-width: 1000px;
-	margin: 0 auto;
+    margin: 0 auto;
+
+}
+.banner > * {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.banner .logos {
+    position: relative;
+    top: 2%;
+    width: 100%;
+	height: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.banner .logos img {
+    max-height: 80px;
+    height: auto;
 }
 
 .banner .overlay {
@@ -40,11 +59,36 @@ body, html {
 
 
 header {
-    background-color: white;
     color: white;
     text-align: center;
     padding: 1em 0;
 }
+.presentation {
+    margin: 20px auto;
+    width: 90%;
+    text-align: justify;
+    font-size: 1.2em;
+    color: #333;
+    line-height: 1.6;
+    padding: 1px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.session {
+    margin: 20px auto;
+    width: 90%;
+    text-align: justify;
+    font-size: 1.2em;
+    color: #333;
+    line-height: 1.6;
+    padding: 1px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	background-color:#FFFFFF
+}
+
 .buttons{
 	display: flex;
     align-items: flex-end;
@@ -53,17 +97,42 @@ header {
 button {
     margin: 0 5px;
     padding: 10px 20px;
-    background-color: #1976D2;
+    background-color: #1976D2D0;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+	font-size:1em;
 }
 
-header button:hover {
+button:hover {
     background-color: #0D47A1;
 }
+.buttons button:hover {
+    background-color: #0056b3;
+}
 
+.button-link {
+    display: inline-block;
+	text-align:center;
+	height: auto;
+    color: #333;
+    text-decoration: none;
+    border: none;
+    transition: transform 0.2s;
+    font-size: 1.2em;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	padding: 30px;
+	background-color: #f5f5f5C0;
+	width:20%;
+}
+.button-link:hover{
+	transform: translateY(-5px);
+}
+.button-link img{
+	max-width:60%;
+}
 main {
     display: flex;
     flex-wrap: wrap;
@@ -72,7 +141,7 @@ main {
 }
 
 .card {
-    background: white;
+    background: #FFFFFFC0;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 1em;
@@ -108,6 +177,19 @@ main {
 
 .card p i {
     font-style: italic;
+}
+.headings{
+	width: 80%;
+	background-color: #FFFFFFC0;
+	margin: 20px auto;
+    text-align: justify;
+    font-size: 1.2em;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .zoom-modal {
@@ -202,6 +284,166 @@ main {
 .card h2, .card p {
     padding: 5px;
 }
+.metrics-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.metric {
+    text-align: center;
+    flex: 1 1 calc(25% - 40px);
+    min-width: 200px;
+    max-width: 300px;
+    margin: 10px;
+}
+
+.info-card {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    width: 80%;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+}
+
+.info-card img {
+    width: 88px; /* Increased by 10% */
+    height: 88px; /* Increased by 10% */
+    margin-left: 20px;
+}
+
+.info-card-content {
+    text-align: left;
+}
+
+.info-card-label {
+    font-size: 3.3em; /* Increased by 10% */
+    font-weight: bold;
+    color: #333;
+    margin-right: 20px;
+}
+
+.metric p {
+    margin: 5px 0 0;
+    font-size: 1em;
+    font-weight: bold;
+    color: #333;
+}
+
+.text-info {
+    text-align: justify;
+	padding: 50px;
+    margin: 20px auto;
+    width: 80%; /* Increased width */
+    font-size: 1.2em;
+    font-weight: normal; /* Removed bold by default */
+    color: #333;
+	background-color: #FFFFFFD0;
+}
+
+.text-info span {
+    font-weight: bold; /* Only span elements will be bold */
+}
+
+
+#inventory {
+    margin: 40px auto;
+    width: 80%;
+    text-align: center;
+	background-color: #FFFFFFD0;
+}
+
+#inventory h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#inventoryTable {
+    text-align: left;
+    font-size: 1.2em;
+}
+
+#inventoryTable h3, #inventoryTable h4 {
+    margin: 10px 0 5px;
+    padding-left: 20px; /* First level identation */
+}
+
+#inventoryTable h3:nth-child(odd), #inventoryTable h4:nth-child(odd) {
+    background-color: #f5f5f5D0;
+}
+
+#inventoryTable h3:nth-child(even), #inventoryTable h4:nth-child(even) {
+    background-color: #e0e0e0D0;
+}
+
+#inventoryTable h4 {
+    margin: 10px 0 5px;
+    padding-left: 40px; /* Second level identation */
+}
+
+#inventoryTable ul {
+    list-style-type: none;
+    padding-left: 80px; /* Final level identation increased */
+    margin: 5px 0;
+}
+
+#inventoryTable li {
+    margin: 3px 0;
+    margin-left: 63px; /* Increased margin left for li */
+    font-style: normal; /* Set font style to normal */
+    list-style-type: none; /* Remove bullet points */
+}
+
+#credits {
+    margin: 40px auto;
+    width: 80%;
+    text-align: left; /* Align text to the left */
+    display: block;
+    align-items: flex-start; /* Align logos to the top */
+    background-color: #FFFFFFD0
+}
+
+#credits h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333333D0;
+}
+
+#credits p {
+    font-size: 1.2em;
+    color: #333000D0;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 170px); /* Adjusted width to make space for logos */
+}
+
+#credits .logos {
+    display: flex;
+    vertical-align: top; /* Align logos to the top */
+    text-align: center;
+}
+
+#credits .logos img {
+    display: block;
+    margin: 10px auto;
+    max-width: 80px;
+    height: auto;
+}
+
 
 @media (max-width: 600px) {
     main {
@@ -211,6 +453,19 @@ main {
     .card {
         margin: 1em 0;
     }
+	.banner {
+		position: relative;
+		width: 100%;
+		padding-bottom: calc(800 / 3500 * 100%);
+		display: flex;
+		margin: 0 auto;
+
+	}
+	.banner > * {
+		position: absolute; 
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
 }
-
-

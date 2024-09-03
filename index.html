@@ -5,59 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aves Procopenses</title>
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/metrics.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="./js/script.js" defer></script>
     <script src="./js/metrics.js" defer></script>
     <script src="./js/effects.js" defer></script> <!-- Added effects.js -->
 </head>
 <body>
-    <header class="banner">        
+    <header class="banner">
+        <div class="logos">
+            <img src="./img/logo-uenp.png" alt="Logo UENP">
+            <img src="./img/logo-ccb-cp.png" alt="Logo CCHE, UENP-CP">
+        </div>
     </header>
-    
-    <div class="metrics-container">
-        <div class="metric">
-            <div class="info-card">
-                <div class="info-card-label" id="speciesCount"></div>
-                <img src="./icons/species-icon.png" alt="Ícone de Espécies">
-            </div>
-        </div>
-        <div class="metric">
-            <div class="info-card">
-                <div class="info-card-label" id="generaCount"></div>
-                <img src="./icons/genera-icon.png" alt="Ícone de Gêneros">
-            </div>
-        </div>
-        <div class="metric">
-            <div class="info-card">
-                <div class="info-card-label" id="familiesCount"></div>
-                <img src="./icons/families-icon.png" alt="Ícone de Famílias">
-            </div>
-        </div>
-        <div class="metric">
-            <div class="info-card">
-                <div class="info-card-label" id="ordersCount"></div>
-                <img src="./icons/orders-icon.png" alt="Ícone de Ordens">
-            </div>
-        </div>
-    </div>
-
-    <div class="text-info">
-        <p><strong><span id="topOrder"></span></strong> é a ordem com maior número de espécies (<strong><span id="topOrderCount"></span></strong> espécies). A família <strong><span id="topFamily"></span></strong> é a mais rica, com <strong><span id="topFamilyCount"></span></strong> espécies, assim como o gênero <strong><i><span id="topGenus"></span></i></strong> com <strong><span id="topGenusCount"></span></strong> espécies.</p>
-    </div>
-    
-    <div class="buttons">
-        <button id="sortNomeComum">Ordenar por Nome Comum</button>
-        <button id="sortEspecie">Ordenar por Espécie</button>
-        <button id="sortFamilia">Ordenar por Família</button>
-        <button id="sortOrdem">Ordenar por Ordem</button>
-        <a href="#inventory" class="button-link">Ir para Inventário</a> <!-- Button link to inventory -->
-        <a href="#catalog" class="button-link">Ir para Imagens</a> <!-- Button link to images -->
-    </div>
-    
+	
+ 		<div class="metrics-container">
+			<div class="metric">
+				<div class="info-card">
+					<div class="info-card-label" id="speciesCount"></div>
+					<img src="./icons/species-icon.png" alt="Ícone de Espécies">
+				</div>
+			</div>
+			<div class="metric">
+				<div class="info-card">
+					<div class="info-card-label" id="generaCount"></div>
+					<img src="./icons/genera-icon.png" alt="Ícone de Gêneros">
+				</div>
+			</div>
+			<div class="metric">
+				<div class="info-card">
+					<div class="info-card-label" id="familiesCount"></div>
+					<img src="./icons/families-icon.png" alt="Ícone de Famílias">
+				</div>
+			</div>
+			<div class="metric">
+				<div class="info-card">
+					<div class="info-card-label" id="ordersCount"></div>
+					<img src="./icons/orders-icon.png" alt="Ícone de Ordens">
+				</div>
+			</div>
+		</div>
+		
+		<div class="presentation">
+			<h2> O projeto </h2>
+			<p>Bem-vindo ao Catálogo de Aves Urbanas de Cornélio Procópio! </p> 
+			<p>O objetivo deste projeto é documentar e divulgar a diversidade de aves encontradas na nossa cidade e região. Aqui, você encontrará informações sobre diferentes espécies, incluindo seus hábitos alimentares, habitats e curiosidades. Esperamos que este projeto inspire a conservação da nossa fauna local. Este projeto foi desenvolvido pelos alunos do curso de Ciências Biológicas da UENP - <i>Campus</i> de Cornélio Procópio</p>
+		</div>
+ 
+	<div class="session" >
+	<h2> O catálogo </h2>
+			<div class="buttons">
+					<button id="sortNomeComum">Ordenar por Nome Comum</button>
+					<button id="sortEspecie">Ordenar por Espécie</button>
+					<button id="sortFamilia">Ordenar por Família</button>
+					<button id="sortOrdem">Ordenar por Ordem</button>
+			</div>
+	</div>
     <main id="catalog">
         <!-- Aqui as aves serão inseridas pelo JavaScript -->
     </main>
+	
+		<div class="session" style="display:none">
+		<h2> Em Números </h2>		
+		<h3> Os mais ricos! </h3>
+			<p><strong><span id="topOrder"></span></strong> é a ordem com maior número de espécies (<strong><span id="topOrderCount"></span></strong> espécies). A família <strong><span id="topFamily"></span></strong> é a mais rica, com <strong><span id="topFamilyCount"></span></strong> espécies, assim como o gênero <strong><i><span id="topGenus"></span></i></strong> com <strong><span id="topGenusCount"></span></strong> espécies.</p>
+		
+	</div>
 
     <div id="inventory">
         <h2>Aves Procopenses: Uma Visão Geral das Espécies!</h2>
@@ -71,10 +83,6 @@
             Professor responsável: Dr. Wilson Frantine-Silva, contato: <a href="mailto:wilson.frantine@uenp.edu.br">wilson.frantine@uenp.edu.br</a>.<br>
             Agradecimentos à UENP, Campus de Cornélio Procópio e ao colegiado de Ciências Biológicas (CCHE, UENP-CP).
         </p>
-        <div class="logos">
-            <img src="./img/logo-uenp.png" alt="Logo UENP">
-            <img src="./img/logo-ccb-cp.png" alt="Logo CCHE, UENP-CP">
-        </div>
     </div>
     
     <div id="zoomModal" class="zoom-modal">
