@@ -54,6 +54,8 @@ window.updateCountsAndTopElements = function () {
 };
 
 // Função para gerar tabela de inventário
+// metrics.js
+
 window.generateInventoryTable = function () {
     const inventoryTable = document.getElementById('inventoryTable');
     if (!inventoryTable) return;

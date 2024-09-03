@@ -36,15 +36,21 @@ function getTopKeyByValue(obj) {
 }
 
 // Função para adicionar listas ordenadas ao DOM
+
 function addSortedListToDOM(parentElement, items, itemFormatter) {
     const ul = document.createElement('ul');
-    items.sort((a, b) => a.localeCompare(b)).forEach(item => {
+    items.sort((a, b) => {
+        const itemA = String(a); // Garante que seja uma string
+        const itemB = String(b); // Garante que seja uma string
+        return itemA.localeCompare(itemB);
+    }).forEach(item => {
         const li = document.createElement('li');
         li.innerHTML = itemFormatter(item);
         ul.appendChild(li);
     });
     parentElement.appendChild(ul);
 }
+
 
 // Funções de Ordenação do Catálogo
 
@@ -66,24 +72,24 @@ function sortByNomeComum(cards, catalog) {
 
 function sortByEspecie(cards, catalog) {
     sortCatalog(cards, catalog, (a, b) => {
-        const especieA = a.querySelector('p.especie').textContent.toLowerCase();
-        const especieB = b.querySelector('p.especie').textContent.toLowerCase();
+        const especieA = a.querySelector('p.especie').textContent.split(': ')[1]?.toLowerCase() || '';
+        const especieB = b.querySelector('p.especie').textContent.split(': ')[1]?.toLowerCase() || '';
         return especieA.localeCompare(especieB);
     });
 }
 
 function sortByFamilia(cards, catalog) {
     sortCatalog(cards, catalog, (a, b) => {
-        const familiaA = a.querySelector('p.familia').textContent.toLowerCase();
-        const familiaB = b.querySelector('p.familia').textContent.toLowerCase();
+        const familiaA = a.querySelector('p.familia').textContent.split(': ')[1]?.toLowerCase() || '';
+        const familiaB = b.querySelector('p.familia').textContent.split(': ')[1]?.toLowerCase() || '';
         return familiaA.localeCompare(familiaB);
     });
 }
 
 function sortByOrdem(cards, catalog) {
     sortCatalog(cards, catalog, (a, b) => {
-        const ordemA = a.querySelector('p.ordem').textContent.toLowerCase();
-        const ordemB = b.querySelector('p.ordem').textContent.toLowerCase();
+        const ordemA = a.querySelector('p.ordem').textContent.split(': ')[1]?.toLowerCase() || '';
+        const ordemB = b.querySelector('p.ordem').textContent.split(': ')[1]?.toLowerCase() || '';
         return ordemA.localeCompare(ordemB);
     });
 }
